@@ -34,14 +34,11 @@ In order to prevent mac spoofing, the Engine will use custom libvirt rules consi
 The custom rule will be defined by vdsm on libvirt named *vdsm-no-mac-spoofing*. Once the system is configured for network filtering, that rule will be sent to VDSM upon running VMs, reported for each VM network interface.
 VDSM will extent the DOM network interface element sent to libvirt:
 
-`  `<interface type="bridge">
-`      `<mac address="aa:aa:aa:aa:aa:aa"/>
-`      `<model type="virtio"/>
-            
-
-            ...
-`      `<filterref filter='vdsm-no-mac-spoofing'/>
-`   `</interface>
+        <interface type="bridge">
+          <mac address="aa:aa:aa:aa:aa:aa"/>
+            <model type="virtio"/>
+            <filterref filter='vdsm-no-mac-spoofing'/>
+         </interface>
 
 libvirt will use the rule to configure the ebtables to prevent mac spoofing and arp mac spoofing.
 
